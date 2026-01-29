@@ -20,7 +20,7 @@ services:
       - insurance-network
 
   rabbitmq:
-    image: rabbitmq:3.12-management
+    image: rabbitmq:4.0-management
     container_name: rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=guest
