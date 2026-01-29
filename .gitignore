@@ -417,5 +417,36 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# Temporary Claude files
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# ==============================================
+# AI Tools Temporary Files
+# ==============================================
+
+# Claude Code temporary files
 tmpclaude-*
+.claude/
+*.claude-temp
+
+# GitHub Copilot temporary files
+.copilot/
+*.copilot
+copilot-*.log
+
+# ==============================================
+# Build Artifacts (additional patterns)
+# ==============================================
+
+# Ensure bin and obj folders are ignored everywhere
+[Bb]in/
+[Oo]bj/
+**/[Bb]in/
+**/[Oo]bj/
+
+# Build output folders
+build/
+Build/
+dist/
+out/
