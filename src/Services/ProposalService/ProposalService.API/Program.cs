@@ -1,41 +1,107 @@
+using ProposalService.API.Endpoints;
+using ProposalService.API.Middleware;
+using ProposalService.Application;
+using ProposalService.Infrastructure;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
 
-var app = builder.Build();
+builder.Host.UseSerilog();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.MapOpenApi();
+    Log.Information("Starting ProposalService API");
+
+    // Add services to the container
+    builder.Services.AddApplicationServices();
+    builder.Services.AddInfrastructureServices(builder.Configuration);
+
+    // Add response compression
+    builder.Services.AddResponseCompression(options =>
+    {
+        options.EnableForHttps = true;
+    });
+
+    // Add OpenAPI/Swagger
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new()
+        {
+            Title = "ProposalService API",
+            Version = "v1",
+            Description = "API for managing insurance proposals",
+            Contact = new()
+            {
+                Name = "Development Team",
+                Email = "dev@ensurance.com"
+            }
+        });
+    });
+
+    // Add health checks
+    builder.Services.AddHealthChecks()
+        .AddSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection") ?? "",
+            name: "database",
+            timeout: TimeSpan.FromSeconds(3));
+
+    // Add CORS if needed
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+    });
+
+    var app = builder.Build();
+
+    // Apply migrations automatically in Development and Docker environments
+    if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Docker")
+    {
+        Log.Information("Applying database migrations...");
+        await app.Services.ApplyMigrationsAsync();
+        Log.Information("Database migrations applied successfully");
+    }
+
+    // Configure the HTTP request pipeline
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProposalService API v1");
+            c.RoutePrefix = "swagger";
+        });
+    }
+
+    app.UseCors();
+    app.UseResponseCompression();
+    app.UseSerilogRequestLogging();
+
+    // Map endpoints
+    app.MapProposalEndpoints();
+
+    // Map health checks
+    app.MapHealthChecks("/health");
+
+    app.Run();
 }
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
+catch (Exception ex)
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-
-app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    Log.CloseAndFlush();
 }
