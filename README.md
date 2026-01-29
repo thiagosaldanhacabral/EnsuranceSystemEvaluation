@@ -480,4 +480,4 @@ For questions about this implementation:
 
 ---
 
-**Built with ❤️ using .NET 10, Clean Architecture, and Domain-Driven Design principles**
+**Built using .NET 10, Clean Architecture, and Domain-Driven Design principles**
