@@ -1,7 +1,7 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
 EndProject
@@ -38,6 +38,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractService.UnitTests", "tests\ContractService.UnitTests\ContractService.UnitTests.csproj", "{E1D0E1A0-0004-0003-0001-000000000001}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractService.IntegrationTests", "tests\ContractService.IntegrationTests\ContractService.IntegrationTests.csproj", "{E1D0E1A0-0004-0004-0001-000000000001}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{82ED63FC-4A53-44CB-9AFA-C323B1774B0E}"
+	ProjectSection(SolutionItems) = preProject
+		docs\01-hexagonal-architecture-overview.md = docs\01-hexagonal-architecture-overview.md
+		docs\02-layered-structure-detail.md = docs\02-layered-structure-detail.md
+		docs\03-microservices-communication.md = docs\03-microservices-communication.md
+		docs\Teste Técnico INDT - Arquitetura Hexagonal (1).pdf = docs\Teste Técnico INDT - Arquitetura Hexagonal (1).pdf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -98,6 +106,9 @@ Global
 		{E1D0E1A0-0004-0004-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1D0E1A0-0004-0004-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E1D0E1A0-0001-0001-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}
 		{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC944} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC943}
@@ -114,5 +125,8 @@ Global
 		{E1D0E1A0-0004-0002-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC946}
 		{E1D0E1A0-0004-0003-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC946}
 		{E1D0E1A0-0004-0004-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC946}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2242C4CC-3939-427F-8DC8-49309C6186FB}
 	EndGlobalSection
 EndGlobal
