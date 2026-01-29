@@ -83,6 +83,7 @@ EnsuranceSystemEvaluation/
 ├── docker-compose.override.yml              # Development overrides
 ├── Start.bat / Start.ps1                     # Quick start scripts
 ├── Stop.bat / Stop.ps1                       # Quick stop scripts
+├── Status.bat / Status.ps1                   # Check services status
 └── Directory.Build.props                     # Shared MSBuild configuration
 ```
 
@@ -152,6 +153,17 @@ EnsuranceSystemEvaluation/
    ```bash
    docker-compose down -v
    ```
+
+5. **Check services status** (Optional)
+   
+   To verify all services are running correctly:
+   - Double-click `Status.bat` or `Status.ps1`
+   - Or run: `Status.bat` / `.\Status.ps1`
+   
+   This will show:
+   - Docker container status
+   - Health check results for all APIs
+   - Direct access URLs for Swagger and RabbitMQ
 
 ### Visual Studio Integration
 
