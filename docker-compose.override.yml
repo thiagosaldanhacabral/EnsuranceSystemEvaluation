@@ -1,0 +1,14 @@
+services:
+  proposal-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=false
+    volumes:
+      - ./src/Services/ProposalService/ProposalService.API/appsettings.Docker.json:/app/appsettings.Docker.json:ro
+
+  contract-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=false
+    volumes:
+      - ./src/Services/ContractService/ContractService.API/appsettings.Docker.json:/app/appsettings.Docker.json:ro
