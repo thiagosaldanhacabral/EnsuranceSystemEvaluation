@@ -8,9 +8,16 @@ namespace ContractService.Domain.ValueObjects;
 /// </summary>
 public sealed class CustomerInfo : ValueObject
 {
-    public string Name { get; }
-    public string CPF { get; }
-    public string? Email { get; }
+    public string Name { get; private set; }
+    public string CPF { get; private set; }
+    public string? Email { get; private set; }
+
+    private CustomerInfo()
+    {
+        // EF Core constructor
+        Name = string.Empty;
+        CPF = string.Empty;
+    }
 
     private CustomerInfo(string name, string cpf, string? email)
     {

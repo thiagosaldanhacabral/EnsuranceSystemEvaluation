@@ -1,41 +1,117 @@
-var builder = WebApplication.CreateBuilder(args);
+using ContractService.API.Endpoints;
+using ContractService.API.Middleware;
+using ContractService.Application;
+using ContractService.Infrastructure;
+using Serilog;
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json")
+        .Build())
+    .CreateLogger();
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.MapOpenApi();
+    Log.Information("Starting ContractService API");
+
+    var builder = WebApplication.CreateBuilder(args);
+
+    // Add environment-specific configuration
+    builder.Configuration.AddJsonFile(
+        $"appsettings.{builder.Environment.EnvironmentName}.json",
+        optional: true,
+        reloadOnChange: true);
+
+    // Use Serilog
+    builder.Host.UseSerilog((context, config) =>
+        config.ReadFrom.Configuration(context.Configuration));
+
+    // Add services to the container
+    builder.Services.AddApplicationServices();
+    builder.Services.AddInfrastructureServices(builder.Configuration);
+
+    // Add API services
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen(options =>
+    {
+        options.SwaggerDoc("v1", new()
+        {
+            Title = "Contract Service API",
+            Version = "v1",
+            Description = "Insurance contract management service - handles contract creation and queries"
+        });
+    });
+
+    // Add health checks
+    builder.Services.AddHealthChecks()
+        .AddSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException("Connection string not found"),
+            name: "database",
+            tags: ["db", "sql"]);
+
+    // Add CORS
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+    });
+
+    // Add response compression
+    builder.Services.AddResponseCompression(options =>
+    {
+        options.EnableForHttps = true;
+    });
+
+    var app = builder.Build();
+
+    // Apply migrations in Development or Docker environment
+    if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Docker")
+    {
+        Log.Information("Applying database migrations...");
+        await app.Services.ApplyMigrationsAsync();
+        Log.Information("Database migrations applied successfully");
+    }
+
+    // Configure the HTTP request pipeline
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+    app.UseSerilogRequestLogging();
+
+    if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Docker")
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(options =>
+        {
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Contract Service API v1");
+            options.RoutePrefix = "swagger";
+        });
+    }
+
+    app.UseCors();
+    app.UseResponseCompression();
+
+    // Map health check endpoints
+    app.MapHealthChecks("/health");
+    app.MapHealthChecks("/health/ready");
+
+    // Map API endpoints
+    app.MapContractEndpoints();
+
+    Log.Information("ContractService API started successfully");
+    await app.RunAsync();
 }
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
+catch (Exception ex)
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
+    Log.Fatal(ex, "ContractService API failed to start");
+    throw;
+}
+finally
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-
-app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    await Log.CloseAndFlushAsync();
 }
