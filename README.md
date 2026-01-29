@@ -81,6 +81,8 @@ EnsuranceSystemEvaluation/
 │   └── ContractService.IntegrationTests/
 ├── docker-compose.yml                        # Container orchestration
 ├── docker-compose.override.yml              # Development overrides
+├── Start.bat / Start.ps1                     # Quick start scripts
+├── Stop.bat / Stop.ps1                       # Quick stop scripts
 └── Directory.Build.props                     # Shared MSBuild configuration
 ```
 
@@ -102,6 +104,24 @@ EnsuranceSystemEvaluation/
    ```
 
 2. **Start all services**
+   
+   **Option A - Using Shortcut Scripts (Recommended for Windows):**
+   
+   Simply double-click one of the following files in Windows Explorer:
+   - `Start.bat` (for Command Prompt)
+   - `Start.ps1` (for PowerShell)
+   
+   Or run from terminal:
+   ```cmd
+   # Command Prompt
+   Start.bat
+   ```
+   ```powershell
+   # PowerShell
+   .\Start.ps1
+   ```
+   
+   **Option B - Using Docker Compose directly:**
    ```bash
    docker-compose up --build
    ```
@@ -118,6 +138,12 @@ EnsuranceSystemEvaluation/
    - RabbitMQ Management: http://localhost:15672 (guest/guest)
 
 4. **Stop all services**
+   
+   **Option A - Using Shortcut Scripts:**
+   - Double-click `Stop.bat` or `Stop.ps1`
+   - Or run: `Stop.bat` / `.\Stop.ps1`
+   
+   **Option B - Using Docker Compose:**
    ```bash
    docker-compose down
    ```

@@ -38,10 +38,10 @@ public class ProposalConfiguration : IEntityTypeConfiguration<Proposal>
                 .IsRequired()
                 .HasMaxLength(11)
                 .HasColumnName("CustomerCPF");
-        });
 
-        builder.HasIndex(p => p.CustomerCPF.Number)
-            .HasDatabaseName("IX_Proposals_CustomerCPF");
+            cpf.HasIndex(c => c.Number)
+                .HasDatabaseName("IX_Proposals_CustomerCPF");
+        });
 
         // Configure Money value object
         builder.OwnsOne(p => p.InsuranceValue, money =>

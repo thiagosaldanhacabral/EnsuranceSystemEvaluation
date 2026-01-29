@@ -44,6 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{82ED63FC-4
 		docs\01-hexagonal-architecture-overview.md = docs\01-hexagonal-architecture-overview.md
 		docs\02-layered-structure-detail.md = docs\02-layered-structure-detail.md
 		docs\03-microservices-communication.md = docs\03-microservices-communication.md
+		README.md = README.md
 		docs\Teste Técnico INDT - Arquitetura Hexagonal (1).pdf = docs\Teste Técnico INDT - Arquitetura Hexagonal (1).pdf
 	EndProjectSection
 EndProject
