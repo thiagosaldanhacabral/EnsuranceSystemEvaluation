@@ -437,5 +437,4 @@ stateDiagram-v2
 
 ---
 
-**Created for:** Technical Interview - Insurance System
 **Focus:** Communication patterns, resilience, and event-driven architecture

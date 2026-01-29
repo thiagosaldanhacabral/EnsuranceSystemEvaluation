@@ -132,7 +132,6 @@ graph TB
 
 ---
 
-**Created for:** Technical Interview - Insurance System
 **Architecture:** Hexagonal (Ports & Adapters)
 **Pattern:** CQRS with MediatR
 **Technology:** .NET 10, SQL Server, RabbitMQ, Docker

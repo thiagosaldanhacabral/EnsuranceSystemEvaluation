@@ -9,9 +9,9 @@ graph TB
         subgraph "API Layer - Primary Adapter"
             direction TB
             API[ProposalService.API]
-            API_EP[ProposalEndpoints.cs<br/>POST /api/proposals<br/>GET /api/proposals<br/>GET /api/proposals/:id<br/>PATCH /api/proposals/:id/status]
-            API_MW[ExceptionHandlingMiddleware.cs<br/>Problem Details RFC 7807]
-            API_PROG[Program.cs<br/>DI Configuration<br/>Swagger Setup<br/>Health Checks]
+            API_EP["ProposalEndpoints.cs<br/>POST /api/proposals<br/>GET /api/proposals<br/>GET /api/proposals/:id<br/>PATCH /api/proposals/:id/status"]
+            API_MW["ExceptionHandlingMiddleware.cs<br/>Problem Details RFC 7807"]
+            API_PROG["Program.cs<br/>DI Configuration<br/>Swagger Setup<br/>Health Checks"]
 
             API --> API_EP
             API --> API_MW
@@ -23,18 +23,18 @@ graph TB
             APP[ProposalService.Application]
 
             subgraph "Commands (Write)"
-                CMD_CREATE[CreateProposalCommand<br/>CreateProposalCommandHandler<br/>CreateProposalCommandValidator]
-                CMD_UPDATE[UpdateProposalStatusCommand<br/>UpdateProposalStatusCommandHandler<br/>UpdateProposalStatusCommandValidator]
+                CMD_CREATE["CreateProposalCommand<br/>CreateProposalCommandHandler<br/>CreateProposalCommandValidator"]
+                CMD_UPDATE["UpdateProposalStatusCommand<br/>UpdateProposalStatusCommandHandler<br/>UpdateProposalStatusCommandValidator"]
             end
 
             subgraph "Queries (Read)"
-                QRY_GET[GetProposalByIdQuery<br/>GetProposalByIdQueryHandler]
-                QRY_LIST[ListProposalsQuery<br/>ListProposalsQueryHandler]
+                QRY_GET["GetProposalByIdQuery<br/>GetProposalByIdQueryHandler"]
+                QRY_LIST["ListProposalsQuery<br/>ListProposalsQueryHandler"]
             end
 
             subgraph "Cross-Cutting"
-                APP_DTO[DTOs<br/>ProposalDto<br/>PagedResult]
-                APP_VAL[ValidationBehavior<br/>FluentValidation Pipeline]
+                APP_DTO["DTOs<br/>ProposalDto<br/>PagedResult"]
+                APP_VAL["ValidationBehavior<br/>FluentValidation Pipeline"]
             end
 
             APP --> CMD_CREATE
@@ -50,19 +50,19 @@ graph TB
             DOM[ProposalService.Domain]
 
             subgraph "Entities"
-                DOM_ENT[Proposal.cs<br/>+ Id: Guid<br/>+ ProposalNumber: string<br/>+ CustomerCPF: CPF<br/>+ InsuranceValue: Money<br/>+ Status: ProposalStatus<br/>---<br/>+ Create(): Proposal<br/>+ Approve(): void<br/>+ Reject(reason): void]
+                DOM_ENT["Proposal.cs<br/>+ Id - Guid<br/>+ ProposalNumber - string<br/>+ CustomerCPF - CPF<br/>+ InsuranceValue - Money<br/>+ Status - ProposalStatus<br/>---<br/>+ Create - Proposal<br/>+ Approve - void<br/>+ Reject - void"]
             end
 
             subgraph "Value Objects"
-                DOM_VO[CPF.cs<br/>Money.cs<br/>ProposalStatus.cs enum]
+                DOM_VO["CPF.cs<br/>Money.cs<br/>ProposalStatus.cs enum"]
             end
 
             subgraph "Ports (Interfaces)"
-                DOM_PORT[IProposalRepository<br/>+ GetByIdAsync()<br/>+ GetAllAsync()<br/>+ AddAsync()<br/>+ UpdateAsync()<br/>---<br/>IProposalEventPublisher<br/>+ PublishAsync()]
+                DOM_PORT["IProposalRepository<br/>+ GetByIdAsync<br/>+ GetAllAsync<br/>+ AddAsync<br/>+ UpdateAsync<br/>---<br/>IProposalEventPublisher<br/>+ PublishAsync"]
             end
 
             subgraph "Domain Events"
-                DOM_EVT[ProposalCreatedEvent<br/>ProposalApprovedEvent<br/>ProposalRejectedEvent]
+                DOM_EVT["ProposalCreatedEvent<br/>ProposalApprovedEvent<br/>ProposalRejectedEvent"]
             end
 
             DOM --> DOM_ENT
@@ -76,15 +76,15 @@ graph TB
             INFRA[ProposalService.Infrastructure]
 
             subgraph "Persistence (EF Core)"
-                INFRA_DB[ProposalDbContext.cs<br/>---<br/>ProposalConfiguration.cs<br/>Entity Type Configuration<br/>Indexes, Relationships<br/>---<br/>ProposalRepository.cs<br/>implements IProposalRepository]
+                INFRA_DB["ProposalDbContext.cs<br/>---<br/>ProposalConfiguration.cs<br/>Entity Type Configuration<br/>Indexes, Relationships<br/>---<br/>ProposalRepository.cs<br/>implements IProposalRepository"]
             end
 
             subgraph "Messaging (RabbitMQ)"
-                INFRA_MSG[ProposalEventPublisher.cs<br/>implements IProposalEventPublisher<br/>---<br/>Uses MassTransit<br/>IPublishEndpoint]
+                INFRA_MSG["ProposalEventPublisher.cs<br/>implements IProposalEventPublisher<br/>---<br/>Uses MassTransit<br/>IPublishEndpoint"]
             end
 
             subgraph "Configuration"
-                INFRA_DI[DependencyInjection.cs<br/>Register Repositories<br/>Register Publishers<br/>Configure EF Core<br/>Configure MassTransit]
+                INFRA_DI["DependencyInjection.cs<br/>Register Repositories<br/>Register Publishers<br/>Configure EF Core<br/>Configure MassTransit"]
             end
 
             INFRA --> INFRA_DB
@@ -93,7 +93,7 @@ graph TB
         end
 
         subgraph "SharedKernel - Building Block"
-            SHARED[SharedKernel<br/>---<br/>Entity.cs abstract<br/>ValueObject.cs abstract<br/>DomainEvent.cs abstract<br/>DomainException.cs<br/>Result.cs]
+            SHARED["SharedKernel<br/>---<br/>Entity.cs abstract<br/>ValueObject.cs abstract<br/>DomainEvent.cs abstract<br/>DomainException.cs<br/>Result.cs"]
         end
 
     end
@@ -321,5 +321,4 @@ builder.OwnsOne(p => p.CustomerCPF, cpf =>
 
 ---
 
-**Created for:** Technical Interview - Insurance System
 **Focus:** Layered structure with Hexagonal Architecture principles
