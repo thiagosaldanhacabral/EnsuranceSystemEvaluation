@@ -1,0 +1,25 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/SharedKernel/SharedKernel.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/" />
+  <Folder Name="/src/Services/ContractService/">
+    <Project Path="src/Services/ContractService/ContractService.API/ContractService.API.csproj" />
+    <Project Path="src/Services/ContractService/ContractService.Application/ContractService.Application.csproj" />
+    <Project Path="src/Services/ContractService/ContractService.Domain/ContractService.Domain.csproj" />
+    <Project Path="src/Services/ContractService/ContractService.Infrastructure/ContractService.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/ProposalService/">
+    <Project Path="src/Services/ProposalService/ProposalService.API/ProposalService.API.csproj" />
+    <Project Path="src/Services/ProposalService/ProposalService.Application/ProposalService.Application.csproj" />
+    <Project Path="src/Services/ProposalService/ProposalService.Domain/ProposalService.Domain.csproj" />
+    <Project Path="src/Services/ProposalService/ProposalService.Infrastructure/ProposalService.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ContractService.IntegrationTests/ContractService.IntegrationTests.csproj" />
+    <Project Path="tests/ContractService.UnitTests/ContractService.UnitTests.csproj" />
+    <Project Path="tests/ProposalService.IntegrationTests/ProposalService.IntegrationTests.csproj" />
+    <Project Path="tests/ProposalService.UnitTests/ProposalService.UnitTests.csproj" />
+  </Folder>
+</Solution>
