@@ -61,12 +61,39 @@ public static class DependencyInjection
     }
 
     /// <summary>
-    /// Apply database migrations automatically
+    /// Apply database migrations automatically with retry logic
     /// </summary>
     public static async Task ApplyMigrationsAsync(this IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<ProposalDbContext>();
-        await context.Database.MigrateAsync();
+
+        const int maxRetries = 10;
+        var delay = TimeSpan.FromSeconds(3);
+
+        for (int i = 0; i < maxRetries; i++)
+        {
+            try
+            {
+                // Apply migrations (this will create the database if it doesn't exist)
+                Console.WriteLine("[ProposalService] Applying database migrations...");
+                await context.Database.MigrateAsync();
+                Console.WriteLine("[ProposalService] Migrations applied successfully");
+
+                return;
+            }
+            catch (Exception ex)
+            {
+                if (i == maxRetries - 1)
+                {
+                    Console.WriteLine($"[ProposalService] Failed to apply migrations after {maxRetries} attempts: {ex.Message}");
+                    throw;
+                }
+
+                Console.WriteLine($"[ProposalService] Migration attempt {i + 1}/{maxRetries} failed: {ex.Message}");
+                Console.WriteLine($"[ProposalService] Retrying in {delay.TotalSeconds} seconds...");
+                await Task.Delay(delay);
+            }
+        }
     }
 }

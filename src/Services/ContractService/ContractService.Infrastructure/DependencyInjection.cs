@@ -107,12 +107,44 @@ public static class DependencyInjection
     }
 
     /// <summary>
-    /// Extension method to apply database migrations
+    /// Extension method to apply database migrations with retry logic
     /// </summary>
     public static async Task ApplyMigrationsAsync(this IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<ContractDbContext>();
-        await context.Database.MigrateAsync();
+
+        const int maxRetries = 20;
+        var delay = TimeSpan.FromSeconds(5);
+
+        for (int i = 0; i < maxRetries; i++)
+        {
+            try
+            {
+                // Apply migrations (this will create the database if it doesn't exist)
+                Console.WriteLine("[ContractService] Applying database migrations...");
+                await context.Database.MigrateAsync();
+                Console.WriteLine("[ContractService] Migrations applied successfully");
+
+                return;
+            }
+            catch (Exception ex)
+            {
+                if (i == maxRetries - 1)
+                {
+                    Console.WriteLine($"[ContractService] Failed to apply migrations after {maxRetries} attempts: {ex.Message}");
+                    Console.WriteLine($"[ContractService] Exception details: {ex}");
+                    throw;
+                }
+
+                Console.WriteLine($"[ContractService] Migration attempt {i + 1}/{maxRetries} failed: {ex.GetType().Name} - {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"[ContractService] Inner exception: {ex.InnerException.GetType().Name} - {ex.InnerException.Message}");
+                }
+                Console.WriteLine($"[ContractService] Retrying in {delay.TotalSeconds} seconds...");
+                await Task.Delay(delay);
+            }
+        }
     }
 }

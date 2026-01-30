@@ -70,12 +70,16 @@ try
 
     var app = builder.Build();
 
-    // Apply migrations in Development or Docker environment
-    if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Docker")
+    // Apply migrations automatically on startup
+    Log.Information("Checking and applying database migrations...");
+    try
     {
-        Log.Information("Applying database migrations...");
         await app.Services.ApplyMigrationsAsync();
-        Log.Information("Database migrations applied successfully");
+    }
+    catch (Exception ex)
+    {
+        Log.Fatal(ex, "Failed to apply database migrations");
+        throw;
     }
 
     // Configure the HTTP request pipeline

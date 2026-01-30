@@ -1,0 +1,20 @@
+version: '3.4'
+
+# Visual Studio Debug Configuration
+# In debug mode, containers wait for VS debugger to attach before running the app
+# The base docker-compose.yml already has simple dependencies without health checks
+# This file is kept for future VS-specific overrides if needed
+services:
+  proposal-api:
+    depends_on:
+      - sqlserver
+      - rabbitmq
+    healthcheck:
+      disable: true
+  contract-api:
+    depends_on:
+      - sqlserver
+      - rabbitmq
+      - proposal-api
+    healthcheck:
+      disable: true

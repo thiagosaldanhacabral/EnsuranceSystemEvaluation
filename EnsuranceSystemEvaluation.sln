@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.2.11415.280
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "src\BuildingBlocks\SharedKernel\SharedKernel.csproj", "{E1D0E1A0-0001-0001-0001-000000000001}"
@@ -50,6 +52,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E1D0E1A0-0001-0001-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E1D0E1A0-0001-0001-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1D0E1A0-0001-0001-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU

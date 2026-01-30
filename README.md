@@ -81,9 +81,11 @@ EnsuranceSystemEvaluation/
 │   └── ContractService.IntegrationTests/
 ├── docker-compose.yml                        # Container orchestration
 ├── docker-compose.override.yml              # Development overrides
+├── docker-compose.vs.debug.yml              # VS debug overrides
 ├── Start.bat / Start.ps1                     # Quick start scripts
 ├── Stop.bat / Stop.ps1                       # Quick stop scripts
 ├── Status.bat / Status.ps1                   # Check services status
+├── Clean.bat                                 # Clean Docker environment
 └── Directory.Build.props                     # Shared MSBuild configuration
 ```
 
@@ -138,12 +140,29 @@ EnsuranceSystemEvaluation/
    - ContractService Swagger: http://localhost:5002/swagger
    - RabbitMQ Management: http://localhost:15672 (guest/guest)
 
+### Debugging with Visual Studio (F5)
+
+For developers using Visual Studio who want to debug the code:
+
+**See [VISUAL_STUDIO_DEBUG.md](VISUAL_STUDIO_DEBUG.md) for detailed instructions.**
+
+Quick steps:
+1. **First time or having issues?** Run `Clean.bat` to clean the environment
+2. Open `EnsuranceSystemEvaluation.sln` in Visual Studio
+3. Set "Multiple startup projects" with `docker-compose` as Start
+4. Press F5
+5. Both APIs will start and be accessible at the same ports
+
+The migrations are **automatically applied** when the APIs start up.
+
+**Troubleshooting**: If you get a "port already in use" error, run `Clean.bat` first.
+
 4. **Stop all services**
-   
+
    **Option A - Using Shortcut Scripts:**
    - Double-click `Stop.bat` or `Stop.ps1`
    - Or run: `Stop.bat` / `.\Stop.ps1`
-   
+
    **Option B - Using Docker Compose:**
    ```bash
    docker-compose down
@@ -153,6 +172,19 @@ EnsuranceSystemEvaluation/
    ```bash
    docker-compose down -v
    ```
+
+5. **Clean environment (troubleshooting)**
+
+   If you encounter issues with containers or ports:
+   ```cmd
+   Clean.bat
+   ```
+
+   This script will:
+   - Stop all containers
+   - Remove all containers (including VS-created ones)
+   - Remove all images
+   - Clean Docker system
 
 5. **Check services status** (Optional)
    
