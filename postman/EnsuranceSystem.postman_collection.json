@@ -1,0 +1,253 @@
+{
+  "info": {
+    "name": "Ensurance System APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection to test ProposalService and ContractService APIs."
+  },
+  "variable": [
+    {
+      "key": "proposalBaseUrl",
+      "value": "http://localhost:5001"
+    },
+    {
+      "key": "contractBaseUrl",
+      "value": "http://localhost:5002"
+    },
+    {
+      "key": "proposalId",
+      "value": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "key": "contractId",
+      "value": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "item": [
+    {
+      "name": "ProposalService",
+      "item": [
+        {
+          "name": "Create Proposal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerName\": \"John Doe\",\n  \"customerCPF\": \"12345678900\",\n  \"insuranceValue\": 10000\n}"
+            },
+            "url": {
+              "raw": "{{proposalBaseUrl}}/api/proposals",
+              "host": [
+                "{{proposalBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "proposals"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Proposals",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{proposalBaseUrl}}/api/proposals?pageNumber=1&pageSize=20&status=",
+              "host": [
+                "{{proposalBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "proposals"
+              ],
+              "query": [
+                {
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "20"
+                },
+                {
+                  "key": "status",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Proposal By Id",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{proposalBaseUrl}}/api/proposals/{{proposalId}}",
+              "host": [
+                "{{proposalBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "proposals",
+                "{{proposalId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Proposal Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newStatus\": \"Approved\",\n  \"rejectionReason\": null\n}"
+            },
+            "url": {
+              "raw": "{{proposalBaseUrl}}/api/proposals/{{proposalId}}/status",
+              "host": [
+                "{{proposalBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "proposals",
+                "{{proposalId}}",
+                "status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{proposalBaseUrl}}/health",
+              "host": [
+                "{{proposalBaseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ContractService",
+      "item": [
+        {
+          "name": "Create Contract",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"proposalId\": \"{{proposalId}}\",\n  \"durationMonths\": 12\n}"
+            },
+            "url": {
+              "raw": "{{contractBaseUrl}}/api/contracts",
+              "host": [
+                "{{contractBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contracts"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Contracts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{contractBaseUrl}}/api/contracts?pageNumber=1&pageSize=20",
+              "host": [
+                "{{contractBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contracts"
+              ],
+              "query": [
+                {
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Contract By Id",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{contractBaseUrl}}/api/contracts/{{contractId}}",
+              "host": [
+                "{{contractBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contracts",
+                "{{contractId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{contractBaseUrl}}/health",
+              "host": [
+                "{{contractBaseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Health Ready",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{contractBaseUrl}}/health/ready",
+              "host": [
+                "{{contractBaseUrl}}"
+              ],
+              "path": [
+                "health",
+                "ready"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
