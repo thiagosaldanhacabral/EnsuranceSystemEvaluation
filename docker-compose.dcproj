@@ -9,6 +9,7 @@
     <DockerServiceName>proposal-api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Clean.bat" />
     <None Include="docker-compose.yml" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
@@ -18,6 +19,13 @@
     </None>
     <None Include=".dockerignore" />
     <None Include="postman\EnsuranceSystem.postman_collection.json" />
+    <None Include="Restart-Failed.ps1" />
+    <None Include="Start.bat" />
+    <None Include="Start.ps1" />
+    <None Include="Status.bat" />
+    <None Include="Status.ps1" />
+    <None Include="Stop.bat" />
+    <None Include="Stop.ps1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="src\Services\ProposalService\ProposalService.API\ProposalService.API.csproj" />

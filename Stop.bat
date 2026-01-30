@@ -4,7 +4,7 @@ echo  Stopping Insurance System
 echo ========================================
 echo.
 
-docker-compose down
+docker-compose stop
 
 if %ERRORLEVEL% NEQ 0 (
     echo.

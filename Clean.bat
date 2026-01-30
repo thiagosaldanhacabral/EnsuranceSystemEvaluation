@@ -4,12 +4,12 @@ echo  Cleaning Docker Containers and Volumes
 echo ========================================
 echo.
 
-echo Stopping all containers...
-docker-compose down
+echo Stopping all containers (keeping volumes)...
+docker-compose down --remove-orphans
 
 echo.
 echo Removing all project containers (if any)...
-docker rm -f contract-api proposal-api rabbitmq sqlserver 2>nul
+docker rm -f contract-api proposal-api 2>nul
 
 echo.
 echo Removing all project images...

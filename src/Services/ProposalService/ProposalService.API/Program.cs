@@ -79,7 +79,7 @@ try
     // Configure the HTTP request pipeline
     app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-    if (app.Environment.IsDevelopment())
+    if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Docker")
     {
         app.UseSwagger();
         app.UseSwaggerUI(c =>

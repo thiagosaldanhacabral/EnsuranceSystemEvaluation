@@ -5,7 +5,7 @@ Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
 try {
-    docker-compose down
+    docker-compose stop
     
     Write-Host ""
     Write-Host "========================================" -ForegroundColor Green
