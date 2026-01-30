@@ -46,7 +46,7 @@ public class CPFTests
 
         // Assert
         act.Should().Throw<DomainException>()
-            .WithMessage("CPF is required");
+            .WithMessage("CPF cannot be empty");
     }
 
     [Theory]

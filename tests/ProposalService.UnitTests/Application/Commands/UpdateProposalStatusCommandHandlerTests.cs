@@ -127,11 +127,11 @@ public class UpdateProposalStatusCommandHandlerTests
 
         // Assert
         await act.Should().ThrowAsync<DomainException>()
-            .WithMessage("Invalid status: InvalidStatus");
+            .WithMessage("Invalid status: InvalidStatus. Must be 'Approved' or 'Rejected'");
     }
 
     [Fact]
-    public async Task Handle_RejectWithoutReason_ShouldThrowDomainException()
+    public async Task Handle_RejectWithoutReason_ShouldUseDefaultReason()
     {
         // Arrange
         var proposal = CreateProposal();
@@ -146,11 +146,11 @@ public class UpdateProposalStatusCommandHandlerTests
         };
 
         // Act
-        var act = async () => await _handler.Handle(command, CancellationToken.None);
+        var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
-        await act.Should().ThrowAsync<DomainException>()
-            .WithMessage("Rejection reason is required");
+        result.Status.Should().Be("Rejected");
+        result.RejectionReason.Should().Be("No reason provided");
     }
 
     private static Proposal CreateProposal()

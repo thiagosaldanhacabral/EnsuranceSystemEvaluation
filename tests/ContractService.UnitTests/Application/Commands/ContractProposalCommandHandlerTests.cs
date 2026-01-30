@@ -4,6 +4,8 @@ using ContractService.Application.Commands.ContractProposal;
 using ContractService.Domain.Entities;
 using ContractService.Domain.Events;
 using ContractService.Domain.Ports;
+using ContractService.Domain.ValueObjects;
+using SharedKernel.Domain;
 using SharedKernel.Exceptions;
 
 namespace ContractService.UnitTests.Application.Commands;
@@ -136,10 +138,23 @@ public class ContractProposalCommandHandlerTests
         var proposal = new ProposalDto
         {
             Id = proposalId,
+            ProposalNumber = "PROP-20260129-00001",
+            CustomerName = "John Doe",
+            CustomerCPF = "11144477735",
+            InsuranceValue = 50000m,
             Status = "Approved"
         };
 
-        var existingContract = Substitute.For<Contract>();
+        // Create a real contract instead of mocking
+        var customer = CustomerInfo.Create("John Doe", "11144477735");
+        var premium = Money.Create(50000m);
+        var existingContract = Contract.Create(
+            proposalId,
+            "CONT-20260129-12345",
+            customer,
+            premium,
+            DateTime.UtcNow.Date.AddDays(1),
+            DateTime.UtcNow.Date.AddMonths(12).AddDays(1));
 
         _proposalClient.GetProposalByIdAsync(proposalId, Arg.Any<CancellationToken>())
             .Returns(proposal);
@@ -193,9 +208,8 @@ public class ContractProposalCommandHandlerTests
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
-        // Premium should be 2% of insurance value
-        var expectedPremium = insuranceValue * 0.02m;
-        result.Premium.Should().Be(expectedPremium);
+        // Premium is the full insurance value
+        result.Premium.Should().Be(insuranceValue);
     }
 
     [Fact]

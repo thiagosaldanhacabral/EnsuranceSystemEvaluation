@@ -38,7 +38,7 @@ public class CreateProposalCommandHandlerTests
         // Assert
         result.Should().NotBeNull();
         result.CustomerName.Should().Be(command.CustomerName);
-        result.CustomerCPF.Should().Be(command.CustomerCPF);
+        result.CustomerCPF.Should().Be("111.444.777-35");
         result.InsuranceValue.Should().Be(command.InsuranceValue);
         result.Status.Should().Be("InAnalysis");
         result.ProposalNumber.Should().NotBeNullOrEmpty();

@@ -37,7 +37,7 @@ public class GetProposalByIdQueryHandlerTests
         result!.Id.Should().Be(proposal.Id);
         result.ProposalNumber.Should().Be(proposal.ProposalNumber);
         result.CustomerName.Should().Be(proposal.CustomerName);
-        result.CustomerCPF.Should().Be(proposal.CustomerCPF.Number);
+        result.CustomerCPF.Should().Be(proposal.CustomerCPF.Formatted);
         result.InsuranceValue.Should().Be(proposal.InsuranceValue.Amount);
         result.Status.Should().Be(proposal.Status.ToString());
     }

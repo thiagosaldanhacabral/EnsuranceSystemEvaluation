@@ -104,7 +104,7 @@ public class ProposalTests
 
         // Assert
         act.Should().Throw<DomainException>()
-            .WithMessage("Cannot approve a proposal that is not in analysis");
+            .WithMessage("Proposal is already approved");
     }
 
     [Fact]
@@ -119,7 +119,7 @@ public class ProposalTests
 
         // Assert
         act.Should().Throw<DomainException>()
-            .WithMessage("Cannot approve a proposal that is not in analysis");
+            .WithMessage("Cannot approve a rejected proposal");
     }
 
     [Fact]
@@ -164,7 +164,7 @@ public class ProposalTests
 
         // Assert
         act.Should().Throw<DomainException>()
-            .WithMessage("Cannot reject a proposal that is not in analysis");
+            .WithMessage("Cannot reject an approved proposal");
     }
 
     private static Proposal CreateValidProposal()

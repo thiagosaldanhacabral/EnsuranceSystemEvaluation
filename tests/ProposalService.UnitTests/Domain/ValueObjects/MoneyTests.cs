@@ -44,7 +44,7 @@ public class MoneyTests
 
         // Assert
         act.Should().Throw<DomainException>()
-            .WithMessage("Amount cannot be negative");
+            .WithMessage("Money amount cannot be negative");
     }
 
     [Fact]
@@ -126,7 +126,7 @@ public class MoneyTests
 
         // Assert
         act.Should().Throw<DomainException>()
-            .WithMessage("Subtraction result cannot be negative");
+            .WithMessage("Cannot subtract more than current amount");
     }
 
     [Fact]

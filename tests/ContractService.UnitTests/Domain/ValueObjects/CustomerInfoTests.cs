@@ -97,7 +97,7 @@ public class CustomerInfoTests
     }
 
     [Theory]
-    [InlineData("123.456.789-01", "11144477735")]
+    [InlineData("123.456.789-01", "12345678901")]
     [InlineData("987.654.321-00", "98765432100")]
     public void Create_WithFormattedCPF_ShouldRemoveFormatting(string formattedCpf, string expectedCpf)
     {
