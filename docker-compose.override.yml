@@ -1,0 +1,40 @@
+services:
+  proposal-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=false
+    volumes:
+      - ./src/Services/ProposalService/ProposalService.API/appsettings.Docker.json:/app/appsettings.Docker.json:ro
+    # Add healthcheck and strict dependencies for production use (Start.bat)
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://localhost:8080/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  contract-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=false
+    volumes:
+      - ./src/Services/ContractService/ContractService.API/appsettings.Docker.json:/app/appsettings.Docker.json:ro
+    # Add healthcheck and strict dependencies for production use (Start.bat)
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      proposal-api:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://localhost:8080/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s

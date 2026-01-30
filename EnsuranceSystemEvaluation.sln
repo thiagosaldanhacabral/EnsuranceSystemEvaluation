@@ -1,0 +1,125 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "src\BuildingBlocks\SharedKernel\SharedKernel.csproj", "{E1D0E1A0-0001-0001-0001-000000000001}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC943}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProposalService", "ProposalService", "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProposalService.Domain", "src\Services\ProposalService\ProposalService.Domain\ProposalService.Domain.csproj", "{E1D0E1A0-0002-0001-0001-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProposalService.Application", "src\Services\ProposalService\ProposalService.Application\ProposalService.Application.csproj", "{E1D0E1A0-0002-0002-0001-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProposalService.Infrastructure", "src\Services\ProposalService\ProposalService.Infrastructure\ProposalService.Infrastructure.csproj", "{E1D0E1A0-0002-0003-0001-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProposalService.API", "src\Services\ProposalService\ProposalService.API\ProposalService.API.csproj", "{E1D0E1A0-0002-0004-0001-000000000001}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContractService", "ContractService", "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractService.Domain", "src\Services\ContractService\ContractService.Domain\ContractService.Domain.csproj", "{E1D0E1A0-0003-0001-0001-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractService.Application", "src\Services\ContractService\ContractService.Application\ContractService.Application.csproj", "{E1D0E1A0-0003-0002-0001-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractService.Infrastructure", "src\Services\ContractService\ContractService.Infrastructure\ContractService.Infrastructure.csproj", "{E1D0E1A0-0003-0003-0001-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractService.API", "src\Services\ContractService\ContractService.API\ContractService.API.csproj", "{E1D0E1A0-0003-0004-0001-000000000001}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProposalService.UnitTests", "tests\ProposalService.UnitTests\ProposalService.UnitTests.csproj", "{E1D0E1A0-0004-0001-0001-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractService.UnitTests", "tests\ContractService.UnitTests\ContractService.UnitTests.csproj", "{E1D0E1A0-0004-0003-0001-000000000001}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{82ED63FC-4A53-44CB-9AFA-C323B1774B0E}"
+	ProjectSection(SolutionItems) = preProject
+		docs\01-hexagonal-architecture-overview.md = docs\01-hexagonal-architecture-overview.md
+		docs\02-layered-structure-detail.md = docs\02-layered-structure-detail.md
+		docs\03-microservices-communication.md = docs\03-microservices-communication.md
+		README.md = README.md
+		docs\Teste Técnico INDT - Arquitetura Hexagonal (1).pdf = docs\Teste Técnico INDT - Arquitetura Hexagonal (1).pdf
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5D6FA44-69F3-4C3D-8F8A-C5E3B3B3E3B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0001-0001-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0001-0001-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0001-0001-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0001-0001-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0002-0001-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0002-0001-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0002-0001-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0002-0001-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0002-0002-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0002-0002-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0002-0002-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0002-0002-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0002-0003-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0002-0003-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0002-0003-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0002-0003-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0002-0004-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0002-0004-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0002-0004-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0002-0004-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0003-0001-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0003-0001-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0003-0001-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0003-0001-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0003-0002-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0003-0002-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0003-0002-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0003-0002-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0003-0003-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0003-0003-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0003-0003-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0003-0003-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0003-0004-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0003-0004-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0003-0004-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0003-0004-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0004-0001-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0004-0001-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0004-0001-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0004-0001-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D0E1A0-0004-0003-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D0E1A0-0004-0003-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D0E1A0-0004-0003-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D0E1A0-0004-0003-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E1D0E1A0-0001-0001-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}
+		{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC944} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC943}
+		{E1D0E1A0-0002-0001-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC944}
+		{E1D0E1A0-0002-0002-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC944}
+		{E1D0E1A0-0002-0003-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC944}
+		{E1D0E1A0-0002-0004-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC944}
+		{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC945} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC943}
+		{E1D0E1A0-0003-0001-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC945}
+		{E1D0E1A0-0003-0002-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC945}
+		{E1D0E1A0-0003-0003-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC945}
+		{E1D0E1A0-0003-0004-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC945}
+		{E1D0E1A0-0004-0001-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC946}
+		{E1D0E1A0-0004-0003-0001-000000000001} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC946}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2242C4CC-3939-427F-8DC8-49309C6186FB}
+	EndGlobalSection
+EndGlobal
